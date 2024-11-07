@@ -1,16 +1,781 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Templates</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="templates-container">
-      hey
-    </div>
+    <title>Templates Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
 
-    <script src="scripts.js"></script>
+        h1 {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        #templatesContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            max-width: 1200px;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 280px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            /* Remove underline for the whole card */
+            color: inherit;
+            /* Inherit color for all child elements */
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 200px;
+        }
+
+        .slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .slider img.active {
+            display: block;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateY(-50%);
+            padding: 0 10px;
+        }
+
+        .control-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .control-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>80+ Web Templates with MIT License</h1>
+    <div id="templatesContainer"></div>
+
+    <script>
+        const templates = [
+            {
+                name: "404 Error Pages v4",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20Error%20Pages%20v4/img/template1.png",
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20Error%20Pages%20v4/img/template2.png",
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20Error%20Pages%20v4/img/template3.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/404%20Error%20Pages%20v4"
+            },
+            {
+                name: "404 Gomen",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20Gomen/img/%E3%81%B4%E3%81%88%E3%82%93%E3%81%94%E3%82%81%E3%82%93.png",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/404%20Gomen"
+            },
+            {
+                name: "404 Page V2",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20Page%20V2/img/template.png",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/404%20Page%20V2"
+            },
+            {
+                name: "404 Page V3",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20Page%20V3/img/template.png",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/404%20Page%20V3"
+            },
+            {
+                name: "404 Page",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20Page/img/template.jpg",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/404%20Page"
+            },
+            {
+                name: "404 beating hearts",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20beating%20hearts/img/template.png",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/404%20beating%20hearts"
+            },
+            {
+                name: "404 cat gang template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/404%20cat%20gang%20template/img/template.png",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/404%20cat%20gang%20template"
+            },
+            {
+                name: "500 Error Code template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/500%20Error%20Code%20template/img/template.png",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/500%20Error%20Code%20template"
+            },
+            {
+                name: "ANALOG-CLOCK",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/ANALOG-CLOCK/img/clock.png",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/ANALOG-CLOCK"
+            },
+            {
+                name: "About Me Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/About%20Me%20Template/img/template.png",
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/About%20Me%20Template"
+            },
+            {
+                name: "Admin Dashboard",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Admin%20Dashboard/img/lightmode.png",
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Admin%20Dashboard/img/darkmode.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Admin%20Dashboard"
+            },
+            {
+                name: "App landing page",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/App%20landing%20page/img/template.gif"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/App%20landing%20page"
+            },
+            {
+                name: "ApprovalTemplate",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/ApprovalTemplate/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/ApprovalTemplate"
+            },
+            {
+                name: "BOOKING TEMPLATE",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/BOOKING%20TEMPLATE/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/BOOKING%20TEMPLATE"
+            },
+            {
+                name: "Bank Account",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Bank%20Account/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Bank%20Account"
+            },
+            {
+                name: "CSS CARD HOVERING EFFECT",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/CSS%20CARD%20HOVERING%20EFFECT/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/CSS%20CARD%20HOVERING%20EFFECT"
+            },
+            {
+                name: "CSS Cards Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/CSS%20Cards%20Template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/CSS%20Cards%20Template"
+            },
+            {
+                name: "Carousel",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Carousel/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Carousel"
+            },
+            {
+                name: "CaserCipher",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/CaserCipher/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/CaserCipher"
+            },
+            {
+                name: "Christmas Card",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Christmas%20Card/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Christmas%20Card"
+            },
+            {
+                name: "Countdown Timer",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Countdown%20Timer/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Countdown%20Timer"
+            },
+            {
+                name: "Dice Game challenge",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Dice%20Game%20challenge/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Dice%20Game%20challenge"
+            },
+            {
+                name: "Domain Sell",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Domain%20Sell/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Domain%20Sell"
+            },
+            {
+                name: "Expanding gallery cards",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Expanding%20gallery%20cards/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Expanding%20gallery%20cards"
+            },
+            {
+                name: "Footer",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Footer/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Footer"
+            },
+            {
+                name: "Form Wave Project",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Form%20Wave%20Project/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Form%20Wave%20Project"
+            },
+            {
+                name: "Glassomorphism",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Glassomorphism/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Glassomorphism"
+            },
+            {
+                name: "Gradient-Generator",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Gradient-Generator/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Gradient-Generator"
+            },
+            {
+                name: "Grid",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Grid/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Grid"
+            },
+            {
+                name: "Interactive Tabs",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Interactive%20Tabs/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Interactive%20Tabs"
+            },
+            {
+                name: "LoadingAnimationButtonTemplate",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/LoadingAnimationButtonTemplate/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/LoadingAnimationButtonTemplates"
+            },
+            {
+                name: "Login Page Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Login%20Page%20Template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Login%20Page%20Template"
+            },
+            {
+                name: "Login Page",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Login%20Page/img/template1.png",
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Login%20Page/img/template2.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Login%20Page"
+            },
+            {
+                name: "Mansory Layout",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Mansory%20Layout/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Mansory%20Layout"
+            },
+            {
+                name: "Memory-Game",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Memory-Game/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Memory-Game"
+            },
+            {
+                name: "Microsoft-clone",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Microsoft-clone/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Microsoft-clone"
+            },
+            {
+                name: "MusicPlayer Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/MusicPlayer%20Template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/MusicPlayer%20Template"
+            },
+            {
+                name: "News Template 1",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/News%20Template%201/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/News%20Template%201"
+            },
+            {
+                name: "NightMode",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/NightMode/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/NightMode"
+            },
+            {
+                name: "Payment Form",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Payment%20Form/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Payment%20Form"
+            },
+            {
+                name: "Payment-Gateway -template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Payment-Gateway%20-template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Payment-Gateway%20-template"
+            },
+            {
+                name: "Portfolio day-night toggle",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Portfolio%20day-night%20toggle/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Portfolio%20day-night%20toggle"
+            },
+            {
+                name: "Price Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Price%20Template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Price%20Template"
+            },
+            {
+                name: "ProfileHover",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/ProfileHover/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/ProfileHover"
+            },
+            {
+                name: "QUIZ--APP",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/QUIZ--APP/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/QUIZ--APP"
+            },
+            {
+                name: "Quote-site",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Quote-site/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Quote-site"
+            },
+            {
+                name: "ROADMAP",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/ROADMAP/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/ROADMAP"
+            },
+            {
+                name: "Registration-login form",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Registration-login%20form/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Registration-login%20form"
+            },
+            {
+                name: "Responsive NavBar Using TailwindCSS",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Responsive%20NavBar%20Using%20TailwindCSS/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Responsive%20NavBar%20Using%20TailwindCSS"
+            },
+            {
+                name: "Responsive Navigation Bar using Bootstrap",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Responsive%20Navigation%20Bar%20using%20Bootstrap/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Responsive%20Navigation%20Bar%20using%20Bootstrap"
+            },
+            {
+                name: "Responsive-Footer-Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Responsive-Footer-Template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Responsive-Footer-Template"
+            },
+            {
+                name: "Restaraunt Website",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Restaraunt%20Website/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Restaraunt%20Website"
+            },
+            {
+                name: "Restaurant Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Restaurant%20Template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Restaurant%20Template"
+            },
+            {
+                name: "Restaurant Website2",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Restaurant%20Website2/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Restaurant%20Website2"
+            },
+            {
+                name: "Resume-Builder-master",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Resume-Builder-master/img/resume-3.jpg"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Resume-Builder-master"
+            },
+            {
+                name: "Rotating images",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Rotating%20images/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Rotating%20images"
+            },
+            {
+                name: "Rotating sidebar",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Rotating%20sidebar/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Rotating%20sidebar"
+            },
+            {
+                name: "Searchbar",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Searchbar/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Searchbar"
+            },
+            {
+                name: "Sidebar and Navbar Mobile",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Sidebar%20and%20Navbar%20Mobile/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Sidebar%20and%20Navbar%20Mobiler"
+            },
+            {
+                name: "Simple todo",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Simple%20todo/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Simple%20todo"
+            },
+            {
+                name: "Socials Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Socials%20Template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Socials%20Template"
+            },
+            {
+                name: "StickyNavbar",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/StickyNavbar/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/StickyNavbar"
+            },
+            {
+                name: "Student-Registeration-Form",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Student-Registeration-Form/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Student-Registeration-Form"
+            },
+            {
+                name: "Theme Clock",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Theme%20Clock/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Theme%20Clock"
+            },
+            {
+                name: "Tic Tac Toe",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Tic%20Tac%20Toe/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Tic%20Tac%20Toe"
+            },
+            {
+                name: "Timeline Design",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Timeline%20Design/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Timeline%20Design"
+            },
+            {
+                name: "Tip Calculator",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Tip%20Calculator/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Tip%20Calculator"
+            },
+            {
+                name: "Travel Blog",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Travel%20Blog/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Travel%20Blog"
+            },
+            {
+                name: "Tribute Page Template",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Tribute%20Page%20Template/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Tribute%20Page%20Template"
+            },
+            {
+                name: "Website Under construction",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/Website%20Under%20construction/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/Website%20Under%20construction"
+            },
+            {
+                name: "calculator",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/calculator/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/calculator"
+            },
+            {
+                name: "connection_timed_out",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/connection_timed_out/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/connection_timed_out"
+            },
+            {
+                name: "css and java clock",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/css%20and%20java%20clock/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/css%20and%20java%20clock"
+            },
+            {
+                name: "flappy bird",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/flappy%20bird/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/flappy%20bird"
+            },
+            {
+                name: "food-delivery",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/food-delivery/img/Screenshot%202023-10-23%20223007.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/food-delivery"
+            },
+            {
+                name: "infinite scroll",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/infinite%20scroll/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/infinite%20scroll"
+            },
+            {
+                name: "mole game",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/mole%20game/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/mole%20game"
+            },
+            {
+                name: "playlist-carousel",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/playlist-carousel/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/playlist-carousel"
+            },
+            {
+                name: "portfolio",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/portfolio/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/portfolio"
+            },
+            {
+                name: "sign up form",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/sign%20up%20form/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/sign%20up%20form"
+            },
+            {
+                name: "wikipedia_search",
+                imgFiles: [
+                    "https://raw.githubusercontent.com/sakshamwithweb/81-website-template/refs/heads/main/Website-Template/wikipedia_search/img/template.png"
+                ],
+                githubLink: "https://github.com/sakshamwithweb/81-website-template/tree/main/Website-Template/wikipedia_search"
+            },
+        ];
+
+
+        function createTemplateCard(template) {
+            const cardLink = document.createElement('a');
+            cardLink.className = 'card';
+            cardLink.href = template.githubLink;
+            cardLink.target = '_blank';
+
+            const cardContent = document.createElement('div');
+            cardContent.className = 'card-content';
+
+            const title = document.createElement('div');
+            title.className = 'card-title';
+            title.textContent = template.name;
+
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'slider';
+
+            if (template.imgFiles.length > 1) {
+                template.imgFiles.forEach((imgSrc, index) => {
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    if (index === 0) img.classList.add('active');
+                    imageContainer.appendChild(img);
+                });
+
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'control-button';
+                prevBtn.textContent = '❮';
+                prevBtn.onclick = (e) => {
+                    e.preventDefault();
+                    changeSlide(imageContainer, -1);
+                };
+
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'control-button';
+                nextBtn.textContent = '❯';
+                nextBtn.onclick = (e) => {
+                    e.preventDefault();
+                    changeSlide(imageContainer, 1);
+                };
+
+                const sliderControls = document.createElement('div');
+                sliderControls.className = 'slider-controls';
+                sliderControls.appendChild(prevBtn);
+                sliderControls.appendChild(nextBtn);
+
+                imageContainer.appendChild(sliderControls);
+            } else {
+                const img = document.createElement('img');
+                img.src = template.imgFiles[0];
+                img.classList.add('active');
+                imageContainer.appendChild(img);
+            }
+
+            cardContent.appendChild(imageContainer);
+            cardContent.appendChild(title);
+            cardLink.appendChild(cardContent);
+
+            return cardLink;
+        }
+
+        function changeSlide(slider, direction) {
+            const images = slider.querySelectorAll('img');
+            let currentIndex = Array.from(images).findIndex(img => img.classList.contains('active'));
+            const newIndex = (currentIndex + direction + images.length) % images.length;
+
+            images[currentIndex].classList.remove('active');
+            images[newIndex].classList.add('active');
+        }
+
+        function renderTemplates() {
+            const container = document.getElementById('templatesContainer');
+            templates.forEach(template => {
+                const card = createTemplateCard(template);
+                container.appendChild(card);
+            });
+        }
+
+        renderTemplates();
+    </script>
+
 </body>
+
 </html>
